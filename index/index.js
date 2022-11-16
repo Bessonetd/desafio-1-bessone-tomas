@@ -1,52 +1,50 @@
 class Usuario {
-    constructor(nombre, apellido, libros, mascotas) {
+    constructor(nombre, apellido) {
         this.nombre = nombre
         this.apellido = apellido
-        this.libros = libros
-        this.mascotas = mascotas
+        this.libro = Usuario.listaLibros
+        this.mascotas = Usuario.listaMascotas
+    }
+    static listaLibros = [{ titulo: "Harry Potter", autor: "J. K. Rowling" }]
+
+    static listaMascotas = ["perro"]
+
+    //LISTA DE METODOS
+
+    getFullName() {
+        return console.log(`Nombre Completo: ${this.nombre} ${this.apellido}`)
+    }
+
+    addMascotas(nuevaMascota) {
+        Usuario.listaMascotas.push(nuevaMascota)
+    }
+
+    countMascotas() {
+        return console.log(Usuario.listaMascotas.length)
+    }
+
+    addBook(nombre, autor) {
+        Usuario.listaLibros.push({ titulo: nombre, autor: autor })
+    }
+
+    getBookName() {
+        return Usuario.listaLibros.forEach(function (elemento) {
+            const listaTituloLibro = [`${elemento.titulo}`]
+            console.log(listaTituloLibro)
+        })
     }
 }
-const listasDeMascotas = ["perro", "gato"]
 
-const listaDeLibros = [
-    { titulo: "Harry Potter", autor: "J. K. Rowling" },
-    { titulo: "It", autor: "Stephen King" }
-]
+const usuario = new Usuario('Tomas', 'Bessone')
 
+console.log(usuario)
 
-const data = new Usuario('Tomas', 'Bessone', listaDeLibros, listasDeMascotas)
+usuario.getFullName()
 
-console.log(data)
+usuario.addMascotas("caballo")
 
-function getFullName() {
-    console.log(data.nombre + " " + data.apellido)
-}
+usuario.countMascotas()
 
-getFullName()
+usuario.addBook("El Señor de los Anillos", "J. R. R. Tolkien")
 
-function addMascota(nombreNuevoMascota) {
-    listasDeMascotas.push(nombreNuevoMascota)
-}
-
-addMascota("caballo")
-
-function countMascotas() {
-    console.log(listasDeMascotas.length)
-}
-
-countMascotas()
-
-function addBook(titulo, autor) {
-    listaDeLibros.push({ titulo: titulo, autor: autor })
-}
-
-addBook("El Señor de los Anillos", "J. R. R. Tolkien")
-
-function getBookName() {
-    listaDeLibros.forEach(function(elemento){
-        const listaTitulosLibro = {titulo: elemento.titulo}
-        console.log(listaTitulosLibro)
-    })
-}
-
-getBookName()
+usuario.getBookName()
